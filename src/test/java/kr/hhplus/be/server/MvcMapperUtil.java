@@ -16,7 +16,7 @@ public class MvcMapperUtil {
                 .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     }
 
-    public static <T> String convertBodyAsString(final T obj) {
+    public static <T> String convertAsString(final T obj) {
         try {
             return objectMapper.writeValueAsString(obj);
         } catch (Exception e) {
