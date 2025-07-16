@@ -35,10 +35,14 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 
+	compileOnly("org.projectlombok:lombok")
+	annotationProcessor("org.projectlombok:lombok")
+
     // DB
 	runtimeOnly("com.mysql:mysql-connector-j")
 
     // Test
+	testImplementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.boot:spring-boot-testcontainers")
 	testImplementation("org.testcontainers:junit-jupiter")
