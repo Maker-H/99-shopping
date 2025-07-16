@@ -52,7 +52,7 @@ class CouponControllerTest {
         MockHttpServletResponse response = mvc.perform(
                 post("/api/coupon/issue")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(convertBodyAsString(requestBody))
+                        .content(convertAsString(requestBody))
         ).andReturn().getResponse();
 
         assertEquals(200, response.getStatus());
