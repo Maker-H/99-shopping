@@ -1,5 +1,6 @@
-package kr.hhplus.be.server.common;
+package kr.hhplus.be.server.common.exception;
 
+import kr.hhplus.be.server.common.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<ApiResponse<String>> handleCustomException(CustomException ex) {
-        log.error("Custom exception occurred: {}", ex.getMessage(), ex);
+        log.error("Custom exception occurred: {}", ex.getCustomMessage(), ex);
         return ResponseEntity.status(ex.getHttpStatus()).body(ApiResponse.fromCustomException(ex));
     }
 

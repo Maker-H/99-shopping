@@ -1,6 +1,7 @@
-package kr.hhplus.be.server.product.dto;
+package kr.hhplus.be.server.product.application.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotNull;
 
 @Schema(description = "상품 조회 응답")
 public record GetProductResponse(

@@ -1,5 +1,6 @@
 package kr.hhplus.be.server;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -38,6 +39,16 @@ public class ApiResponseMapperUtil {
             JsonNode root = objectMapper.readTree(servletResponse.getContentAsString());
             JsonNode dataNode = root.get("data");
             return objectMapper.treeToValue(dataNode, clazz);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static <T> T extractResponseDataAsObj(final MockHttpServletResponse servletResponse, TypeReference<T> typeReference) {
+        try {
+            JsonNode root = objectMapper.readTree(servletResponse.getContentAsString());
+            JsonNode dataNode = root.get("data");
+            return objectMapper.treeToValue(dataNode, typeReference);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

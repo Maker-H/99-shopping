@@ -19,10 +19,10 @@ public class PointService {
     private final PointJpaRepository repository;
 
     @Transactional
-    public ChargePointResponse chargePoint(ChargePointRequest command) {
+    public ChargePointResponse chargePoint(ChargePointRequest request) {
 
-        Amount amount = command.asAmount();
-        UserId userId = command.asUserId();
+        Amount amount = request.asAmount();
+        UserId userId = request.asUserId();
 
         UserPointEntity found = repository.findByUserId(userId)
                 .orElseGet(() -> UserPointEntity.empty(userId));

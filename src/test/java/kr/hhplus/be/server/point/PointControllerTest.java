@@ -1,5 +1,6 @@
 package kr.hhplus.be.server.point;
 
+import kr.hhplus.be.server.E2ETest;
 import kr.hhplus.be.server.point.domain.Amount;
 import kr.hhplus.be.server.point.domain.UserId;
 import kr.hhplus.be.server.point.domain.UserPointEntity;
@@ -14,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,10 +25,8 @@ import static kr.hhplus.be.server.ApiResponseMapperUtil.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
-@Transactional
-@AutoConfigureMockMvc
-@SpringBootTest(properties = "spring.main.lazy-initialization=true")
-class PointControllerTest {
+
+class PointControllerTest extends E2ETest {
 
     @Autowired
     private MockMvc mvc;
@@ -97,7 +97,6 @@ class PointControllerTest {
 
         ChargePointRequest request = new ChargePointRequest(userIdValue, addedAmount);
 
-        System.out.println("================");
         MockHttpServletResponse response = mvc.perform(
                 patch("/api/point/charge")
                         .contentType(MediaType.APPLICATION_JSON)

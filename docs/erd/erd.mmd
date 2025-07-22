@@ -22,17 +22,19 @@ erDiagram
         bigint product_id PK
         varchar name
         bigint price
-        TIMESTAMP created_at
         bigint total_stock
         bigint current_stock
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
     }
 
 %%  ORDER(created_at DESC)
     ORDER {
         bigint order_id PK
         bigint user_id FK
-        TIMESTAMP created_at
         varchar status "CREATED | BEFORE_PAYMENT | SUCCESS | CANCELED"
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
     }
 
 %%  ORDER_ITEM(order_id)
@@ -42,6 +44,8 @@ erDiagram
         bigint product_id FK
         bigint price
         bigint quantity
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
     }
 
 %%  ORDER_PAYMENT(order_id)
@@ -51,6 +55,8 @@ erDiagram
         bigint coupon_id FK
         bigint discount_amount
         bigint total_amount
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
     }
 
     COUPON_POLICY {
@@ -60,6 +66,7 @@ erDiagram
         bigint remaining_quantity
         TIMESTAMP expired_at
         TIMESTAMP created_at
+        TIMESTAMP updated_at
     }
 
 %%  COUPON (coupon_policy_id)
@@ -70,4 +77,6 @@ erDiagram
         bigint coupon_policy_id FK
         TIMESTAMP issued_at
         varchar status "ISSUED | USED | EXPIRED"
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
     }
