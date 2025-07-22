@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public enum ErrorType {
     EXAMPLE_ERROR_TYPE(HttpStatus.BAD_REQUEST, "CLIENT_CODE", "this is description for server log"),
+
     ;
 
     private final HttpStatus httpStatus;

@@ -1,6 +1,5 @@
 package kr.hhplus.be.server.coupon;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import kr.hhplus.be.server.coupon.domain.CouponStatus;
 import kr.hhplus.be.server.coupon.dto.GetCouponsResponse;
 import kr.hhplus.be.server.coupon.dto.IssueCouponRequest;
@@ -12,9 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.ZoneId;
-
-import static kr.hhplus.be.server.MvcMapperUtil.*;
+import static kr.hhplus.be.server.ApiResponseMapperUtil.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 

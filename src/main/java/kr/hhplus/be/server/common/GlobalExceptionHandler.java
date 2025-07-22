@@ -1,15 +1,11 @@
 package kr.hhplus.be.server.common;
 
-import kr.hhplus.be.server.coupon.CouponController;
-import kr.hhplus.be.server.order.OrderController;
-import kr.hhplus.be.server.point.PointController;
-import kr.hhplus.be.server.product.ProductController;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Slf4j
@@ -26,6 +22,20 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponse<String>> handleAll(Throwable ex) {
         log.error("throwable caused", ex);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ApiResponse.fromUnknownException());
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<?> handleValidationErrors(MethodArgumentNotValidException ex) {
+        log.error("MethodArgumentNotValidException caused", ex);
+
+        String errorMessage = ex.getBindingResult()
+                .getFieldErrors()
+                .stream()
+                .findFirst()
+                .map(FieldError::getDefaultMessage)
+                .orElse("유효하지 않은 요청입니다.");
+
+        return ResponseEntity.badRequest().body(ApiResponse.fromOtherException("INVALID_PARAMETER", errorMessage));
     }
 
 }

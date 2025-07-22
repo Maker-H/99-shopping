@@ -19,6 +19,10 @@ public record ApiResponse<T> (
         return new ApiResponse<>(SUCCESS_CODE, data, Instant.now());
     }
 
+    public static ApiResponse<String> fromOtherException(String clientCode, String exceptionMsg) {
+        return new ApiResponse<>(clientCode, exceptionMsg, Instant.now());
+    }
+
     public static ApiResponse<String> fromCustomException(CustomException customException) {
         return new ApiResponse<>(customException.getClientCode(), "", Instant.now());
     }

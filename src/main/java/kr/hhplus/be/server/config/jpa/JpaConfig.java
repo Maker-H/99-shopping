@@ -48,7 +48,7 @@ import org.springframework.transaction.PlatformTransactionManager;
     }
 
  */
-@EnableJpaRepositories
+@EnableJpaRepositories(basePackages = "kr.hhplus.be.server")
 public class JpaConfig {
 
     @Bean

@@ -1,8 +1,8 @@
 erDiagram
 
-    USER ||--o{ POINT_HISTORY : has
-    USER ||--o{ ORDER : places
-    USER ||--o{ COUPON : owns
+    USER_POINT ||--o{ POINT_HISTORY : has
+    USER_POINT ||--o{ ORDER : places
+    USER_POINT ||--o{ COUPON : owns
 
     PRODUCT ||--o{ ORDER_ITEM : contains
     ORDER ||--o{ ORDER_ITEM : includes
@@ -10,19 +10,12 @@ erDiagram
 
     COUPON_POLICY ||--o{ COUPON : defines
 
-    USER {
-        bigint user_id PK
+    USER_POINT {
+        bigint point_id PK
+        bigint user_id FK
         bigint point_amount
         TIMESTAMP created_at
         TIMESTAMP updated_at
-    }
-
-    POINT_HISTORY {
-        bigint user_point_history_id PK
-        bigint user_id FK
-        bigint point_amount
-        varchar point_type "CHARGE | USE"
-        TIMESTAMP created_at
     }
 
     PRODUCT {
