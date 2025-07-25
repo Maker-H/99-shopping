@@ -1,7 +1,8 @@
-package kr.hhplus.be.server.order.dto;
+package kr.hhplus.be.server.order.application.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import kr.hhplus.be.server.order.domain.OrderStatus;
+import kr.hhplus.be.server.order.domain.OrderEntity;
+import kr.hhplus.be.server.order.domain.OrderEntity.OrderStatus;
 
 public record CreateOrderResponse (
 

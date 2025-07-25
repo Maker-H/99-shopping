@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import kr.hhplus.be.server.common.ApiResponse;
 import kr.hhplus.be.server.point.application.PointService;
-import kr.hhplus.be.server.point.domain.UserId;
+import kr.hhplus.be.server.user.domain.UserId;
 import kr.hhplus.be.server.point.application.dto.ChargePointRequest;
 import kr.hhplus.be.server.point.application.dto.ChargePointResponse;
 import kr.hhplus.be.server.point.application.dto.GetPointResponse;

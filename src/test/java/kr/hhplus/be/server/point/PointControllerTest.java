@@ -2,7 +2,7 @@ package kr.hhplus.be.server.point;
 
 import kr.hhplus.be.server.E2ETest;
 import kr.hhplus.be.server.point.domain.Amount;
-import kr.hhplus.be.server.point.domain.UserId;
+import kr.hhplus.be.server.user.domain.UserId;
 import kr.hhplus.be.server.point.domain.UserPointEntity;
 import kr.hhplus.be.server.point.application.dto.ChargePointRequest;
 import kr.hhplus.be.server.point.application.dto.ChargePointResponse;
@@ -11,13 +11,9 @@ import kr.hhplus.be.server.point.infra.PointJpaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.concurrent.ThreadLocalRandom;
 

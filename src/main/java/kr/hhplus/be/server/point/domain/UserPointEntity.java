@@ -2,6 +2,8 @@ package kr.hhplus.be.server.point.domain;
 
 import jakarta.persistence.*;
 import kr.hhplus.be.server.common.BaseTimeEntity;
+import kr.hhplus.be.server.coupon.domain.DiscountAmount;
+import kr.hhplus.be.server.user.domain.UserId;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +24,7 @@ public class UserPointEntity extends BaseTimeEntity {
     @Embedded
     private UserId userId;
 
-    @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "point_amount", nullable = false))
     private Amount pointAmount;
 
     private UserPointEntity(UserId userId, Amount pointAmount) {
@@ -34,8 +36,20 @@ public class UserPointEntity extends BaseTimeEntity {
         return new UserPointEntity(userId, Amount.zero());
     }
 
-    public void charge(Amount amount) {
-        this.pointAmount.add(amount);
+    public Amount charge(Amount amount) {
+        Amount chargedAmount = this.pointAmount.add(amount);
+        this.pointAmount = chargedAmount;
+        return chargedAmount;
+    }
+
+    public boolean isSufficient(DiscountAmount discountAmount) {
+        return this.pointAmount.getValue() >= discountAmount.getValue();
+    }
+
+    public Amount use(DiscountAmount discountAmount) {
+        Amount subtractedAmount = this.pointAmount.use(discountAmount);
+        this.pointAmount = subtractedAmount;
+        return subtractedAmount;
     }
 }
 

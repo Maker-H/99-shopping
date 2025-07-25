@@ -2,7 +2,7 @@ package kr.hhplus.be.server.product.application;
 
 import kr.hhplus.be.server.common.exception.ErrorType;
 import kr.hhplus.be.server.product.application.dto.GetProductResponse;
-import kr.hhplus.be.server.product.application.exception.NoMatchingProductException;
+import kr.hhplus.be.server.product.application.exception.NoSuchProductException;
 import kr.hhplus.be.server.product.domain.ProductDetail;
 import kr.hhplus.be.server.product.domain.ProductEntity;
 import kr.hhplus.be.server.product.infra.ProductJpaRepository;
@@ -51,12 +51,12 @@ class ProductServiceTest {
         Long productId = 999L;
         when(repository.findById(productId)).thenReturn(Optional.empty());
 
-        NoMatchingProductException noMatchingProductException = assertThrows(
-                NoMatchingProductException.class,
+        NoSuchProductException noSuchProductException = assertThrows(
+                NoSuchProductException.class,
                 () -> productService.getProduct(productId)
         );
 
-        assertEquals(ErrorType.NO_SUCH_PRODUCT, noMatchingProductException.getErrorType());
+        assertEquals(ErrorType.NO_SUCH_PRODUCT, noSuchProductException.getErrorType());
 
         verify(repository).findById(productId);
     }

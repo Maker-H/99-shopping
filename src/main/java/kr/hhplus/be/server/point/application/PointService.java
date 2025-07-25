@@ -3,7 +3,7 @@ package kr.hhplus.be.server.point.application;
 import jakarta.transaction.Transactional;
 import kr.hhplus.be.server.point.application.mapper.PointMapper;
 import kr.hhplus.be.server.point.domain.Amount;
-import kr.hhplus.be.server.point.domain.UserId;
+import kr.hhplus.be.server.user.domain.UserId;
 import kr.hhplus.be.server.point.domain.UserPointEntity;
 import kr.hhplus.be.server.point.application.dto.ChargePointRequest;
 import kr.hhplus.be.server.point.application.dto.ChargePointResponse;

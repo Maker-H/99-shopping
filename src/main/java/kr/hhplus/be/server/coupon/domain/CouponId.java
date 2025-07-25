@@ -1,4 +1,4 @@
-package kr.hhplus.be.server.point.domain;
+package kr.hhplus.be.server.coupon.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -10,9 +10,9 @@ import lombok.*;
 @Embeddable
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserId {
+public class CouponId {
 
-    @Column(name = "user_id", nullable = false)
+    @Column(name = "coupon_id", nullable = false)
     private Long value;
 
 }

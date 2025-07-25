@@ -5,7 +5,7 @@ import kr.hhplus.be.server.product.application.dto.GetTop5ProductResponse;
 import kr.hhplus.be.server.product.application.mapper.ProductMapper;
 import kr.hhplus.be.server.product.domain.ProductEntity;
 import kr.hhplus.be.server.product.application.dto.GetProductResponse;
-import kr.hhplus.be.server.product.application.exception.NoMatchingProductException;
+import kr.hhplus.be.server.product.application.exception.NoSuchProductException;
 import kr.hhplus.be.server.product.infra.ProductJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class ProductService {
 
     public GetProductResponse getProduct(Long productId) {
         ProductEntity found = repository.findById(productId)
-                .orElseThrow(() -> new NoMatchingProductException(NO_SUCH_PRODUCT, "productId: " + productId + "를 찾을 수 없습니다"));
+                .orElseThrow(() -> new NoSuchProductException("productId: " + productId + "를 찾을 수 없습니다"));
 
         return ProductMapper.toGetProductResponse(found);
     }

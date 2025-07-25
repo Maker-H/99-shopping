@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import kr.hhplus.be.server.point.domain.Amount;
-import kr.hhplus.be.server.point.domain.UserId;
+import kr.hhplus.be.server.user.domain.UserId;
 
 @Schema(description = "포인트 충전 요청")
 public record ChargePointRequest(

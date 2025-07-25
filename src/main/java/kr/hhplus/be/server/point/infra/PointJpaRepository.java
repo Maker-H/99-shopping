@@ -1,6 +1,6 @@
 package kr.hhplus.be.server.point.infra;
 
-import kr.hhplus.be.server.point.domain.UserId;
+import kr.hhplus.be.server.user.domain.UserId;
 import kr.hhplus.be.server.point.domain.UserPointEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 

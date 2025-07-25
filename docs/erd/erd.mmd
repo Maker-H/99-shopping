@@ -28,11 +28,10 @@ erDiagram
         TIMESTAMP updated_at
     }
 
-%%  ORDER(created_at DESC)
     ORDER {
         bigint order_id PK
         bigint user_id FK
-        varchar status "CREATED | BEFORE_PAYMENT | SUCCESS | CANCELED"
+        varchar status "CREATED | SUCCESS | CANCELED"
         TIMESTAMP created_at
         TIMESTAMP updated_at
     }

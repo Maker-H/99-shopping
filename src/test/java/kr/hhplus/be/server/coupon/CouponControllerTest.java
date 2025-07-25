@@ -1,6 +1,6 @@
 package kr.hhplus.be.server.coupon;
 
-import kr.hhplus.be.server.coupon.domain.CouponStatus;
+import kr.hhplus.be.server.coupon.domain.CouponEntity;
 import kr.hhplus.be.server.coupon.dto.GetCouponsResponse;
 import kr.hhplus.be.server.coupon.dto.IssueCouponRequest;
 import kr.hhplus.be.server.coupon.dto.IssueCouponResponse;
@@ -12,6 +12,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static kr.hhplus.be.server.ApiResponseMapperUtil.*;
+import static kr.hhplus.be.server.coupon.domain.CouponEntity.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 

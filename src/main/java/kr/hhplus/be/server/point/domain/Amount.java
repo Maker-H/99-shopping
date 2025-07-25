@@ -1,7 +1,7 @@
 package kr.hhplus.be.server.point.domain;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import kr.hhplus.be.server.coupon.domain.DiscountAmount;
 import lombok.*;
 
 @Getter @ToString
@@ -10,15 +10,21 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Amount {
 
-    @Column(name = "point_amount", nullable = false)
     private Long value;
 
     public static Amount zero() {
         return new Amount(0L);
     }
 
-    public void add(Amount amount) {
-        this.value += amount.getValue();
+    public Amount add(Amount other) {
+        return new Amount(this.value + other.getValue());
     }
 
+    public Amount use(Amount other) {
+        return new Amount(this.value - other.getValue());
+    }
+
+    public Amount use(DiscountAmount discountAmount) {
+        return new Amount(this.value - discountAmount.getValue());
+    }
 }

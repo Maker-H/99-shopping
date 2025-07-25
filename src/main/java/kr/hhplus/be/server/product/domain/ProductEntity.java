@@ -24,4 +24,8 @@ public class ProductEntity extends BaseTimeEntity {
         this.detail = detail;
     }
 
+    public boolean hasEnoughQuantity(Long quantity) {
+        return this.detail.getCurrentStock() >= quantity;
+    }
+
 }
