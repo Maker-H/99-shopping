@@ -21,6 +21,7 @@ public class ProductService {
 
     private final ProductJpaRepository repository;
 
+    @Transactional(readOnly = true)
     public GetProductResponse getProduct(Long productId) {
         ProductEntity found = repository.findById(productId)
                 .orElseThrow(() -> new NoSuchProductException("productId: " + productId + "를 찾을 수 없습니다"));

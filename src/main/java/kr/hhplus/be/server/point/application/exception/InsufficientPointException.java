@@ -1,4 +1,4 @@
-package kr.hhplus.be.server.point.application;
+package kr.hhplus.be.server.point.application.exception;
 
 import kr.hhplus.be.server.common.exception.CustomException;
 import kr.hhplus.be.server.common.exception.ErrorType;

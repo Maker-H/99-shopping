@@ -1,4 +1,4 @@
-package kr.hhplus.be.server.order.application.dto;
+package kr.hhplus.be.server.order.application;
 
 import kr.hhplus.be.server.coupon.application.exception.NoSuchCoupon;
 import kr.hhplus.be.server.coupon.application.exception.NotUsableCoupon;
@@ -7,10 +7,12 @@ import kr.hhplus.be.server.coupon.domain.CouponPolicyEntity;
 import kr.hhplus.be.server.coupon.domain.DiscountAmount;
 import kr.hhplus.be.server.coupon.infra.CouponJpaRepository;
 import kr.hhplus.be.server.coupon.infra.infra.CouponPolicyJpaRepository;
+import kr.hhplus.be.server.order.application.dto.CreateOrderRequest;
+import kr.hhplus.be.server.order.application.dto.CreateOrderResponse;
 import kr.hhplus.be.server.order.application.exception.InsufficientStockException;
 import kr.hhplus.be.server.order.domain.OrderEntity;
 import kr.hhplus.be.server.order.infra.OrderJpaRepository;
-import kr.hhplus.be.server.point.application.InsufficientPointException;
+import kr.hhplus.be.server.point.application.exception.InsufficientPointException;
 import kr.hhplus.be.server.point.domain.Amount;
 import kr.hhplus.be.server.point.domain.UserPointEntity;
 import kr.hhplus.be.server.point.infra.PointJpaRepository;
@@ -20,6 +22,7 @@ import kr.hhplus.be.server.product.infra.ProductJpaRepository;
 import kr.hhplus.be.server.user.domain.UserId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +35,7 @@ public class OrderService {
     private final PointJpaRepository pointRepository;
 
 
+    @Transactional
     public CreateOrderResponse processOrder(String txKey, CreateOrderRequest request) {
 
         // 주문 생성

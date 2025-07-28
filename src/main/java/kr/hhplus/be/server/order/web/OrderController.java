@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import kr.hhplus.be.server.common.ApiResponse;
-import kr.hhplus.be.server.order.application.dto.OrderService;
+import kr.hhplus.be.server.order.application.OrderService;
 import kr.hhplus.be.server.order.application.dto.CreateOrderRequest;
 import kr.hhplus.be.server.order.application.dto.CreateOrderResponse;
 import lombok.RequiredArgsConstructor;
