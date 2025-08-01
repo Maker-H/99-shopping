@@ -1,10 +1,10 @@
 package kr.hhplus.be.server.coupon.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import kr.hhplus.be.server.coupon.domain.CouponStatus;
+import kr.hhplus.be.server.coupon.domain.CouponEntity;
+import kr.hhplus.be.server.coupon.domain.CouponEntity.CouponStatus;
 
 import java.time.Instant;
-import java.time.ZonedDateTime;
 
 public record CouponDto (
         @Schema(description = "사용자 ID", example = "42")

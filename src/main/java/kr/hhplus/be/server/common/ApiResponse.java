@@ -1,5 +1,6 @@
 package kr.hhplus.be.server.common;
 
+import kr.hhplus.be.server.common.exception.CustomException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 
@@ -19,12 +20,16 @@ public record ApiResponse<T> (
         return new ApiResponse<>(SUCCESS_CODE, data, Instant.now());
     }
 
+    public static ApiResponse<String> fromOtherException(String clientCode, String exceptionMsg) {
+        return new ApiResponse<>(clientCode, exceptionMsg, Instant.now());
+    }
+
     public static ApiResponse<String> fromCustomException(CustomException customException) {
-        return new ApiResponse<>(customException.getClientCode(), "", Instant.now());
+        return new ApiResponse<>(customException.getClientCode(), null, Instant.now());
     }
 
     public static ApiResponse<String> fromUnknownException() {
-        return new ApiResponse<>(UNKNOWN_ERROR_CODE, "", Instant.now());
+        return new ApiResponse<>(UNKNOWN_ERROR_CODE, null, Instant.now());
     }
 
     public static <T> ResponseEntity<ApiResponse<T>> successWithHeader(T data, Map<String, String> headers) {

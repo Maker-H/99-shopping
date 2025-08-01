@@ -1,8 +1,8 @@
 erDiagram
 
-    USER ||--o{ POINT_HISTORY : has
-    USER ||--o{ ORDER : places
-    USER ||--o{ COUPON : owns
+    USER_POINT ||--o{ POINT_HISTORY : has
+    USER_POINT ||--o{ ORDER : places
+    USER_POINT ||--o{ COUPON : owns
 
     PRODUCT ||--o{ ORDER_ITEM : contains
     ORDER ||--o{ ORDER_ITEM : includes
@@ -10,36 +10,30 @@ erDiagram
 
     COUPON_POLICY ||--o{ COUPON : defines
 
-    USER {
-        bigint user_id PK
+    USER_POINT {
+        bigint point_id PK
+        bigint user_id FK
         bigint point_amount
         TIMESTAMP created_at
         TIMESTAMP updated_at
-    }
-
-    POINT_HISTORY {
-        bigint user_point_history_id PK
-        bigint user_id FK
-        bigint point_amount
-        varchar point_type "CHARGE | USE"
-        TIMESTAMP created_at
     }
 
     PRODUCT {
         bigint product_id PK
         varchar name
         bigint price
-        TIMESTAMP created_at
         bigint total_stock
         bigint current_stock
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
     }
 
-%%  ORDER(created_at DESC)
     ORDER {
         bigint order_id PK
         bigint user_id FK
+        varchar status "CREATED | SUCCESS | CANCELED"
         TIMESTAMP created_at
-        varchar status "CREATED | BEFORE_PAYMENT | SUCCESS | CANCELED"
+        TIMESTAMP updated_at
     }
 
 %%  ORDER_ITEM(order_id)
@@ -49,6 +43,8 @@ erDiagram
         bigint product_id FK
         bigint price
         bigint quantity
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
     }
 
 %%  ORDER_PAYMENT(order_id)
@@ -58,6 +54,8 @@ erDiagram
         bigint coupon_id FK
         bigint discount_amount
         bigint total_amount
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
     }
 
     COUPON_POLICY {
@@ -67,6 +65,7 @@ erDiagram
         bigint remaining_quantity
         TIMESTAMP expired_at
         TIMESTAMP created_at
+        TIMESTAMP updated_at
     }
 
 %%  COUPON (coupon_policy_id)
@@ -77,4 +76,6 @@ erDiagram
         bigint coupon_policy_id FK
         TIMESTAMP issued_at
         varchar status "ISSUED | USED | EXPIRED"
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
     }

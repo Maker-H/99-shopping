@@ -1,25 +1,22 @@
 package kr.hhplus.be.server.order;
 
-import kr.hhplus.be.server.MvcMapperUtil;
-import kr.hhplus.be.server.order.domain.OrderStatus;
-import kr.hhplus.be.server.order.dto.CreateOrderRequest;
-import kr.hhplus.be.server.order.dto.CreateOrderResponse;
-import kr.hhplus.be.server.order.dto.OrderItemDto;
+import kr.hhplus.be.server.order.application.dto.CreateOrderRequest;
+import kr.hhplus.be.server.order.application.dto.CreateOrderResponse;
+import kr.hhplus.be.server.order.application.dto.OrderItemDto;
+import kr.hhplus.be.server.order.domain.OrderEntity;
+import kr.hhplus.be.server.order.web.OrderController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
 
-import static kr.hhplus.be.server.MvcMapperUtil.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static kr.hhplus.be.server.ApiResponseMapperUtil.*;
+import static kr.hhplus.be.server.order.domain.OrderEntity.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 @WebMvcTest(controllers = OrderController.class)

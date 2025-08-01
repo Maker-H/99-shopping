@@ -5,4 +5,4 @@ sequenceDiagram
 
     PointController->>PointService: 포인트 조회 요청
     PointService->>PointRepository: 현재 잔액 조회
-    PointService->>PointController: 현재 잔액 반환
+    PointService->>PointController: 현재 잔액 반환 (포인트 정보가 없는 경우 생성 후 0 반환)

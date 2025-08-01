@@ -4,7 +4,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.hhplus.be.server.common.ApiResponse;
-import kr.hhplus.be.server.coupon.domain.CouponStatus;
+import kr.hhplus.be.server.coupon.domain.CouponEntity;
+import kr.hhplus.be.server.coupon.domain.CouponEntity.CouponStatus;
 import kr.hhplus.be.server.coupon.dto.CouponDto;
 import kr.hhplus.be.server.coupon.dto.GetCouponsResponse;
 import kr.hhplus.be.server.coupon.dto.IssueCouponRequest;
@@ -12,10 +13,10 @@ import kr.hhplus.be.server.coupon.dto.IssueCouponResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
-import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+
+import static kr.hhplus.be.server.coupon.domain.CouponEntity.CouponStatus.*;
 
 
 @RestController
@@ -32,14 +33,14 @@ public class CouponController {
 
         CouponDto firstCoupon = new CouponDto(userId,
                 1L,
-                CouponStatus.ISSUED,
+                ISSUED,
                 1000L,
                 Instant.now().plus(2, ChronoUnit.DAYS)
         );
 
         CouponDto secondCoupon = new CouponDto(userId,
                 2L,
-                CouponStatus.ISSUED,
+                ISSUED,
                 1000L,
                 Instant.now().plus(2, ChronoUnit.DAYS)
         );
@@ -59,7 +60,7 @@ public class CouponController {
         IssueCouponResponse response = new IssueCouponResponse(
                 request.userId(),
                 1L,
-                CouponStatus.ISSUED,
+                ISSUED,
                 1000L,
                 Instant.now().plus(2, ChronoUnit.DAYS)
 

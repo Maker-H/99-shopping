@@ -1,10 +1,11 @@
 package kr.hhplus.be.server.coupon.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import kr.hhplus.be.server.coupon.domain.CouponStatus;
+import kr.hhplus.be.server.coupon.domain.CouponEntity;
 
 import java.time.Instant;
-import java.time.ZonedDateTime;
+
+import static kr.hhplus.be.server.coupon.domain.CouponEntity.*;
 
 public record IssueCouponResponse (
 
