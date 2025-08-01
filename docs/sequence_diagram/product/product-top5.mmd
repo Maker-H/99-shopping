@@ -1,0 +1,12 @@
+sequenceDiagram
+    participant ProductController
+    participant ProductService
+    participant ProductRepository
+
+    ProductController->>ProductService: 3일간 상위 top5 상품 조회 요청
+
+    ProductService->>ProductRepository: 최근 3일 & status=SUCCESS 중 판매량 기준 상위 5개 상품 ID 조회
+
+    ProductRepository->>ProductService: 판매량 상위 5개 상품 전달
+
+    ProductService->>ProductController: 상품 정보 응답

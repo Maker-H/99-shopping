@@ -1,0 +1,39 @@
+sequenceDiagram
+    participant OrderController
+    participant OrderService
+    participant PointRepository
+    participant CouponRepository
+    participant ProductRepository
+    participant OrderRepository
+    participant DataPlatform
+    note right of DataPlatform: 외부 데이터 분석 플랫폼
+
+    OrderController->>OrderService: 주문 및 결제 요청
+
+    OrderService->>OrderRepository: 주문서 저장(CREATED)
+    OrderService->>ProductRepository: 상품 재고 조회
+    OrderService->>CouponRepository: 쿠폰 유효성 검증
+    OrderService->>PointRepository: 사용자 잔액 조회
+
+    alt 유효성 실패 (잔액 부족, 재고 부족, 쿠폰 무효)
+        OrderService->>OrderRepository: 주문서 업데이트(CANCELED)
+        OrderService-->>OrderController: 예외 발생 (400 Bad Request)
+    else 유효성 통과
+        OrderService->>OrderRepository: 주문서 업데이트(BEFORE_PAYMENT)
+
+        OrderService->>PointRepository: 잔액 차감
+        OrderService->>PointRepository: 포인트 히스토리 저장(USE)
+
+        OrderService->>ProductRepository: 재고 차감
+        OrderService->>CouponRepository: 쿠폰 사용 처리(USED)
+
+        OrderService->>OrderRepository: 주문서 업데이트(SUCCESS)
+
+        alt DataPlatform 전송 성공
+            OrderService-->>DataPlatform: 주문 정보 전송
+        else 전송 실패
+            OrderService->>OrderService: 로그 기록, 재시도 예약
+        end
+
+        OrderService-->>OrderController: 주문 완료 (200 OK)
+    end

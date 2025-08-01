@@ -1,0 +1,5 @@
+stateDiagram-v2
+    [*] --> CREATED : 주문 생성됨
+    CREATED --> BEFORE_PAYMENT : 도메인 객체 조회 성공
+    BEFORE_PAYMENT --> CANCELED : 도메인 행동 중 예외 발생(포인트 차감, 재고 감소, 쿠폰 사용 등)
+    BEFORE_PAYMENT --> SUCCESS : 결제 및 상태 변경 성공

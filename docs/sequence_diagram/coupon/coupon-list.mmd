@@ -1,0 +1,9 @@
+sequenceDiagram
+    participant CouponController
+    participant CouponService
+    participant CouponRepository
+
+    CouponController->>CouponService: 보유 쿠폰 조회
+    CouponService->>CouponRepository: 사용자 쿠폰 조회
+    CouponRepository-->>CouponService: 쿠폰 목록 응답
+    CouponService-->>CouponController: 쿠폰 목록 응답

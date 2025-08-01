@@ -1,0 +1,17 @@
+sequenceDiagram
+    participant PointController
+    participant PointService
+    participant PointRepository
+
+    PointController->>PointService: 포인트 충전 요청
+
+    PointService->>PointRepository: 현재 잔액 조회
+    PointService->>PointService: 새 잔액 계산 (기존 - 사용 금액)
+
+    alt 충전 금액이 0 이하
+        PointService-->>PointController: PointException(400 Bad Request) 발생
+    else 정상 충전
+        PointService->>PointRepository: 잔액 업데이트
+        PointService->>PointRepository: 포인트 히스토리 업데이트(CHARGE)
+        PointService-->>PointController: 충전 성공 응답
+    end

@@ -1,0 +1,80 @@
+erDiagram
+
+    USER ||--o{ POINT_HISTORY : has
+    USER ||--o{ ORDER : places
+    USER ||--o{ COUPON : owns
+
+    PRODUCT ||--o{ ORDER_ITEM : contains
+    ORDER ||--o{ ORDER_ITEM : includes
+    ORDER ||--|| ORDER_PAYMENT : has
+
+    COUPON_POLICY ||--o{ COUPON : defines
+
+    USER {
+        bigint user_id PK
+        bigint point_amount
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+
+    POINT_HISTORY {
+        bigint user_point_history_id PK
+        bigint user_id FK
+        bigint point_amount
+        varchar point_type "CHARGE | USE"
+        TIMESTAMP created_at
+    }
+
+    PRODUCT {
+        bigint product_id PK
+        varchar name
+        bigint price
+        TIMESTAMP created_at
+        bigint total_stock
+        bigint current_stock
+    }
+
+%%  ORDER(created_at DESC)
+    ORDER {
+        bigint order_id PK
+        bigint user_id FK
+        TIMESTAMP created_at
+        varchar status "CREATED | BEFORE_PAYMENT | SUCCESS | CANCELED"
+    }
+
+%%  ORDER_ITEM(order_id)
+    ORDER_ITEM {
+        bigint order_item_id PK
+        bigint order_id FK
+        bigint product_id FK
+        bigint price
+        bigint quantity
+    }
+
+%%  ORDER_PAYMENT(order_id)
+    ORDER_PAYMENT {
+        bigint order_payment_id PK
+        bigint order_id FK
+        bigint coupon_id FK
+        bigint discount_amount
+        bigint total_amount
+    }
+
+    COUPON_POLICY {
+        bigint coupon_policy_id PK
+        bigint discount_amount
+        bigint total_quantity
+        bigint remaining_quantity
+        TIMESTAMP expired_at
+        TIMESTAMP created_at
+    }
+
+%%  COUPON (coupon_policy_id)
+%%  COUPON (user_id)
+    COUPON {
+        bigint coupon_id PK
+        bigint user_id FK
+        bigint coupon_policy_id FK
+        TIMESTAMP issued_at
+        varchar status "ISSUED | USED | EXPIRED"
+    }
